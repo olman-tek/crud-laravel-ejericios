@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('contenido')
     <h1>Catálogo de libros</h1>
- 
+    <p><a href="{{ route('libros.create') }}">Nuevo libro</a></p>
     <table>
         <thead>
             <tr>

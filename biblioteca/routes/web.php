@@ -21,3 +21,7 @@ Route::middleware('auth')->group(function () {
         ->name('logout');
     Route::resource('libros', LibroController::class)->only(['index']);
 });
+
+Route::resource('libros', LibroController::class)
+    ->only(['index', 'create', 'store']);
+
