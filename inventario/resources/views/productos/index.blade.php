@@ -30,6 +30,13 @@
           </td>
           <td>
             <a href="{{ route('productos.edit', $producto) }}">Editar</a>
+            <form method="POST" style="display:inline"
+                  action="{{ route('productos.destroy', $producto) }}"
+                  onsubmit="return confirm('¿Eliminar este producto?');">
+              @csrf
+              @method('DELETE')
+              <button type="submit">Eliminar</button>
+            </form>
           </td>
         </tr>
       @empty
@@ -40,4 +47,3 @@
     </tbody>
   </table>
 @endsection
-
