@@ -28,3 +28,4 @@ Route::resource('libros', LibroController::class)
 Route::resource('libros', LibroController::class)
     ->only(['index', 'create', 'store', 'edit', 'update']);
 
+Route::resource('libros', LibroController::class)->except(['show']);
