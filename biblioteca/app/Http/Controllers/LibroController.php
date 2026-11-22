@@ -57,4 +57,20 @@ class LibroController extends Controller
         ]);
     }
 
+    public function edit(Libro $libro)
+    {
+        return view('libros.edit', compact('libro'));
+    }
+ 
+    public function update(Request $request, Libro $libro)
+    {
+        $datos = $this->validar($request, $libro);
+    
+        $libro->update($datos);
+    
+        return redirect()->route('libros.index')
+            ->with('exito', 'Libro actualizado correctamente.');
+    }
+
+
 }

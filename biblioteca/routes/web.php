@@ -25,3 +25,6 @@ Route::middleware('auth')->group(function () {
 Route::resource('libros', LibroController::class)
     ->only(['index', 'create', 'store']);
 
+Route::resource('libros', LibroController::class)
+    ->only(['index', 'create', 'store', 'edit', 'update']);
+
