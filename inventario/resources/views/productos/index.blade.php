@@ -11,6 +11,7 @@
         <th>Nombre</th>
         <th>Precio</th>
         <th>Existencias</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -27,12 +28,16 @@
               {{ $producto->existencias }}
             @endif
           </td>
+          <td>
+            <a href="{{ route('productos.edit', $producto) }}">Editar</a>
+          </td>
         </tr>
       @empty
         <tr>
-          <td colspan="5">No hay productos registrados.</td>
+          <td colspan="6">No hay productos registrados.</td>
         </tr>
       @endforelse
     </tbody>
   </table>
 @endsection
+
