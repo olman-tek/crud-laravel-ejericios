@@ -30,6 +30,21 @@ class EstudianteController extends Controller
             ->with('exito', 'Estudiante registrado correctamente.');
     }
  
+    public function edit(Estudiante $estudiante)
+    {
+        return view('estudiantes.edit', compact('estudiante'));
+    }
+ 
+    public function update(Request $request, Estudiante $estudiante)
+    {
+        $datos = $this->validar($request, $estudiante);
+ 
+        $estudiante->update($datos);
+ 
+        return redirect()->route('estudiantes.index')
+            ->with('exito', 'Estudiante actualizado correctamente.');
+    }
+ 
     private function validar(Request $request, ?Estudiante $estudiante = null): array
     {
         return $request->validate([
