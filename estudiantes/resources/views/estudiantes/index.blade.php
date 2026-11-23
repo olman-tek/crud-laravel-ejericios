@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('contenido')
   <h1>Registro de estudiantes</h1>
+  <p><a href="{{ route('estudiantes.create') }}">Nuevo estudiante</a></p>
  
   <table>
     <thead>
