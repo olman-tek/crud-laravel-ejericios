@@ -30,6 +30,21 @@ class MascotaController extends Controller
             ->with('exito', 'Mascota registrada correctamente.');
     }
  
+    public function edit(Mascota $mascota)
+    {
+        return view('mascotas.edit', compact('mascota'));
+    }
+ 
+    public function update(Request $request, Mascota $mascota)
+    {
+        $datos = $this->validar($request, $mascota);
+ 
+        $mascota->update($datos);
+ 
+        return redirect()->route('mascotas.index')
+            ->with('exito', 'Mascota actualizada correctamente.');
+    }
+ 
     private function validar(Request $request, ?Mascota $mascota = null): array
     {
         return $request->validate([

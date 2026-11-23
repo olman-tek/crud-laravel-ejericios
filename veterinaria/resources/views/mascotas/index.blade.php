@@ -12,6 +12,7 @@
         <th>Especie</th>
         <th>Propietario</th>
         <th>Fecha de nacimiento</th>
+        <th>Acciones</th>
       </tr>
     </thead>
     <tbody>
@@ -23,10 +24,13 @@
           <td>{{ ucfirst($mascota->especie) }}</td>
           <td>{{ $mascota->propietario }}</td>
           <td>{{ $mascota->fecha_nacimiento->format('d/m/Y') }}</td>
+          <td>
+            <a href="{{ route('mascotas.edit', $mascota) }}">Editar</a>
+          </td>
         </tr>
       @empty
         <tr>
-          <td colspan="6">No hay mascotas registradas.</td>
+          <td colspan="7">No hay mascotas registradas.</td>
         </tr>
       @endforelse
     </tbody>

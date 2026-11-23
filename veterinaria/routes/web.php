@@ -20,5 +20,5 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'destroy'])
         ->name('logout');
     Route::resource('mascotas', MascotaController::class)
-        ->only(['index', 'create', 'store']);
+        ->only(['index', 'create', 'store', 'edit', 'update']);
 });
