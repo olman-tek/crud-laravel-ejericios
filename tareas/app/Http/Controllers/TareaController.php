@@ -30,6 +30,21 @@ class TareaController extends Controller
             ->with('exito', 'Tarea registrada correctamente.');
     }
  
+    public function edit(Tarea $tarea)
+    {
+        return view('tareas.edit', compact('tarea'));
+    }
+ 
+    public function update(Request $request, Tarea $tarea)
+    {
+        $datos = $this->validar($request);
+ 
+        $tarea->update($datos);
+ 
+        return redirect()->route('tareas.index')
+            ->with('exito', 'Tarea actualizada correctamente.');
+    }
+ 
     private function validar(Request $request): array
     {
         return $request->validate([
