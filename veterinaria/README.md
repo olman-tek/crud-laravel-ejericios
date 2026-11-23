@@ -1,58 +1,70 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
-## About Laravel
-
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
+# Registro de mascotas
+ 
+Aplicación CRUD en Laravel 13 con Blade, Eloquent y MySQL. Permite iniciar
+sesión y registrar, consultar, editar y eliminar mascotas de una clínica veterinaria. Todos los datos son ficticios.
+ 
+## Requisitos
+ 
+- PHP 8.3 o superior con la extensión pdo_mysql
+- Composer 2
+- MySQL (por ejemplo, el de XAMPP) en ejecución
+- Git
+ 
+## Instalación y ejecución
+ 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/olman-tek/crud-laravel-ejercicios.git
+cd crud-laravel-ejercicios/veterinaria
+composer install
+copy .env.example .env
+php artisan key:generate
 ```
-
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+ 
+Después configura MySQL y ejecuta las migraciones y los seeders (secciones
+siguientes). Para iniciar el servidor:
+ 
+```bash
+php artisan serve
+```
+ 
+Abre http://127.0.0.1:8000/login
+ 
+## Configuración de MySQL
+ 
+Crear la base de datos:
+ 
+```sql
+CREATE DATABASE veterinaria CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+```
+ 
+Editar el archivo .env (en XAMPP, usuario root sin contraseña):
+ 
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=veterinaria
+DB_USERNAME=root
+DB_PASSWORD=
+SESSION_DRIVER=file
+CACHE_STORE=file
+QUEUE_CONNECTION=sync
+```
+ 
+## Migración y seeding
+ 
+```bash
+php artisan migrate
+php artisan db:seed
+```
+ 
+## Credenciales
+ 
+- Usuario: admin
+- Contraseña: 12345678
+ 
+## Qué hace cada pieza
+ 
+- **Migración:** crea la tabla users (cuentas, con usuario único y contraseña con hash), la tabla mascotas (id, codigo único, nombre, especie, propietario, fecha_nacimiento, created_at, updated_at) y las tablas internas de Laravel.
+- **Factory (MascotaFactory):** genera mascotas ficticias con un código único (MAS-0000), un nombre, una especie permitida (perro, gato u otro), un propietario y una fecha de nacimiento pasada.
+- **Seeder:** DatabaseSeeder ejecuta UsuarioDemoSeeder, que crea o actualiza el usuario admin con la contraseña con hash, y MascotaSeeder, que inserta diez mascotas con la factory solo si la tabla está vacía.

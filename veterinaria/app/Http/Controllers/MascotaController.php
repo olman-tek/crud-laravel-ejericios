@@ -45,6 +45,14 @@ class MascotaController extends Controller
             ->with('exito', 'Mascota actualizada correctamente.');
     }
  
+    public function destroy(Mascota $mascota)
+    {
+        $mascota->delete();
+ 
+        return redirect()->route('mascotas.index')
+            ->with('exito', 'Mascota eliminada correctamente.');
+    }
+ 
     private function validar(Request $request, ?Mascota $mascota = null): array
     {
         return $request->validate([

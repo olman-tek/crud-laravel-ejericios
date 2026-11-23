@@ -26,6 +26,13 @@
           <td>{{ $mascota->fecha_nacimiento->format('d/m/Y') }}</td>
           <td>
             <a href="{{ route('mascotas.edit', $mascota) }}">Editar</a>
+            <form method="POST" style="display:inline"
+                  action="{{ route('mascotas.destroy', $mascota) }}"
+                  onsubmit="return confirm('¿Eliminar esta mascota?');">
+              @csrf
+              @method('DELETE')
+              <button type="submit">Eliminar</button>
+            </form>
           </td>
         </tr>
       @empty
