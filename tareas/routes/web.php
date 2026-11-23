@@ -1,3 +1,4 @@
+<?php
  
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\TareaController;
@@ -19,5 +20,5 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'destroy'])
         ->name('logout');
     Route::resource('tareas', TareaController::class)
-        ->only(['index']);
+        ->only(['index', 'create', 'store']);
 });

@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('contenido')
   <h1>Control de tareas</h1>
+  <p><a href="{{ route('tareas.create') }}">Nueva tarea</a></p>
  
   <table>
     <thead>
@@ -31,3 +32,4 @@
     </tbody>
   </table>
 @endsection
+
